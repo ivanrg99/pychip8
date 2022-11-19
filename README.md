@@ -8,3 +8,7 @@ Press SPACE to pause the VM
 
 Available keys are mapped in keyboard.py
 Most ROMS will use Q, W and E as their keys
+
+TODO: Add speaker
+
+If you find any bugs, feel free to open a PR
