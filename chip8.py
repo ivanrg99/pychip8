@@ -9,9 +9,6 @@ import sys
 
 class Chip8:
     def __init__(self):
-        self.renderer = Renderer()
-        self.keyboard = Keyboard()
-        self.speaker = Speaker()
         self.memory = [0] * 4096
         self.registers = [0] * 16
         self.index = 0
@@ -21,6 +18,15 @@ class Chip8:
         self.sound_timer = 0
         self.paused = False
         self.speed = 10
+        try:
+            self.load_rom(sys.argv[1])
+        except:
+            print("Usage: chip8.py path_of_rom")
+            exit()
+
+        self.renderer = Renderer()
+        self.keyboard = Keyboard()
+        self.speaker = Speaker()
 
     def load_rom(self, rom_path):
         f = open(rom_path, "rb")
@@ -249,10 +255,5 @@ if __name__ == '__main__':
     while True:
         chip8 = Chip8()
         chip8.load_default_sprites()
-        try:
-            chip8.load_rom(sys.argv[1])
-        except:
-            print("Usage: chip8.py path_of_rom")
-            exit()
         if chip8.run() != "RESET":
             exit()
